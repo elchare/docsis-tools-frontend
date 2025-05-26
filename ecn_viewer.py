@@ -30,12 +30,13 @@ def show_ecn_tool():
 
     if uploaded_file and st.button("🚀 Analyze ECN"):
         with st.spinner("Analyzing ECN..."):
+            headers = {}
+            if "API_KEY" in st.secrets:
+                headers["x-api-key"] = st.secrets["API_KEY"]
+                
             response = requests.post(
                 API_URL,
-                headers = {}
-                if "API_KEY" in st.secrets:
-                    headers["x-api-key"] = st.secrets["API_KEY"]
-            
+                headers=headers,
                 files={"file": (uploaded_file.name, uploaded_file.getvalue(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document")},
                 data={
                     "keywords": keywords,
