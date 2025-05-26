@@ -9,7 +9,7 @@ def show_ecn_tool():
     st.markdown("Upload a DOCSIS ECN `.docx` file and extract paragraphs involving specific keywords.")
 
     keywords = st.text_input("🔍 Keywords (comma-separated)", value="MUST,SHOULD,MAY")
-    case_sensitive = st.checkbox("Case sensitive match", value=False)
+    case_sensitive = st.checkbox("Case sensitive match", value=True)
     whole_word = st.checkbox("Match whole words only", value=True)
 
     st.markdown("### 📥 Try with a Sample ECN File")
