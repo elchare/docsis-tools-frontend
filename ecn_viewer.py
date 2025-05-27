@@ -6,7 +6,7 @@ API_URL = "https://docsis-tools-api.onrender.com/process-ecn"  # Update if neede
 def show_ecn_tool():
     st.title("📄 DOCSIS ECN Analyzer")
 
-    st.markdown("Upload a DOCSIS ECN `.docx` file. The tool scans tracked changes (insertions/deletions) and extracts those containing selected keywords.")
+    st.markdown("Upload a DOCSIS ECN `.docx` file. This tool scans **tracked changes** (insertions/deletions) and extracts paragraphs that contain the selected keywords.")
 
     keywords = st.text_input("🔍 Keywords (comma-separated)", value="MUST,SHOULD,MAY")
     case_sensitive = st.checkbox("Case sensitive match", value=True)
