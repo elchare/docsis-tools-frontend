@@ -37,8 +37,10 @@ def show_ecn_tool():
     if uploaded_file and st.button("🚀 Analyze ECN"):
         with st.spinner("Analyzing ECN..."):
             headers = {}
-            if "API_KEY" in st.secrets:
+            try:
                 headers["x-api-key"] = st.secrets["API_KEY"]
+            except Exception:
+                pass  # No API key available, skip
                 
             response = requests.post(
                 API_URL,
