@@ -1,7 +1,12 @@
 import streamlit as st
 import requests
+import os
 
-API_URL = "https://docsis-tools-api.onrender.com/process-ecn"  # Update if needed
+#API_URL = "https://docsis-tools-api.onrender.com/process-ecn"  # Update if needed
+
+# Get API endpoint from environment variable or use default
+API_ENDPOINT = os.getenv("DOCSIS_TOOLS_API_ENDPOINT", "https://docsis-tools-api.onrender.com/process")
+IS_DEVELOPMENT = os.getenv("DOCSIS_TOOLS_ENV", "production").lower() == "development"
 
 def show_ecn_tool():
     st.title("📄 DOCSIS ECN Analyzer")
@@ -13,6 +18,12 @@ def show_ecn_tool():
         **Note:** Keywords are matched at the **paragraph level**, not individual sentences.
         """
     )
+
+    # Only show API endpoint input in development mode
+    if IS_DEVELOPMENT:
+        api_url = st.text_input("🔗 API Endpoint (FastAPI backend)", value=API_ENDPOINT)
+    else:
+        api_url = API_ENDPOINT
 
     keywords = st.text_input("🔍 Keywords (comma-separated)", value="MUST,SHOULD,MAY")
     case_sensitive = st.checkbox("Case sensitive match", value=True)
@@ -43,7 +54,7 @@ def show_ecn_tool():
                 pass  # No API key available, skip
                 
             response = requests.post(
-                API_URL,
+                api_url,
                 headers=headers,
                 files={"file": (uploaded_file.name, uploaded_file.getvalue(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document")},
                 data={
