@@ -5,7 +5,7 @@ import os
 #API_URL = "https://docsis-tools-api.onrender.com/process-ecn"  # Update if needed
 
 # Get API endpoint from environment variable or use default
-API_ENDPOINT = os.getenv("DOCSIS_TOOLS_API_ENDPOINT", "https://docsis-tools-api.onrender.com/process")
+API_ENDPOINT = os.getenv("DOCSIS_TOOLS_API_ENDPOINT", "https://docsis-tools-api.onrender.com/process-ecn")
 IS_DEVELOPMENT = os.getenv("DOCSIS_TOOLS_ENV", "production").lower() == "development"
 
 def show_ecn_tool():
