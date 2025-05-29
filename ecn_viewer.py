@@ -2,10 +2,9 @@ import streamlit as st
 import requests
 import os
 
-#API_URL = "https://docsis-tools-api.onrender.com/process-ecn"  # Update if needed
-
 # Get API endpoint from environment variable or use default
 API_ENDPOINT = os.getenv("DOCSIS_TOOLS_API_ENDPOINT", "https://docsis-tools-api.onrender.com/process-ecn")
+LOCAL_API_ENDPOINT = "http://127.0.0.1:8002/process-ecn"
 IS_DEVELOPMENT = os.getenv("DOCSIS_TOOLS_ENV", "production").lower() == "development"
 
 def show_ecn_tool():
@@ -21,7 +20,7 @@ def show_ecn_tool():
 
     # Only show API endpoint input in development mode
     if IS_DEVELOPMENT:
-        api_url = st.text_input("🔗 API Endpoint (FastAPI backend)", value=API_ENDPOINT)
+        api_url = st.text_input("🔗 API Endpoint (FastAPI backend)", value=LOCAL_API_ENDPOINT)
     else:
         api_url = API_ENDPOINT
 
